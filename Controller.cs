@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 namespace GuessNumber
 {
     internal class Controller
-    {        
+    {
         public IValidArgs validArgs { get; set; }
         public IRandomGen randomGen { get; set; }
-        public Controller(IValidArgs _validArgs, IRandomGen _randomGen)
+        public ISelection selection { get; set; }
+        public Controller(IValidArgs _validArgs, IRandomGen _randomGen, ISelection _selection)
         {
             this.validArgs = _validArgs;
             this.randomGen = _randomGen;
+            this.selection = _selection;
         }
         public void RunController(string[] args)
         {
@@ -24,11 +26,7 @@ namespace GuessNumber
 
             var randomNumber = randomGen.GetRandomNumbers(param[1], param[2]);
 
-
-            Console.WriteLine(randomNumber);
-
-
-
+            selection.Select(param[0], randomNumber);        
 
         }
     }
